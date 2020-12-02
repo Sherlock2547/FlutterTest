@@ -1,18 +1,19 @@
 /*
  * @Author: William-Zhou
  * @Date: 2020-11-02 09:42:15
- * @LastEditTime: 2020-11-03 14:51:43
+ * @LastEditTime: 2020-11-23 20:48:46
  * @LastEditors: William-Zhou
  * @Description: 
  */
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import '../ScaleDemo.dart';
 import 'Home.dart';
 import 'Category.dart';
 import 'Setting.dart';
-import '../../pages/Button.dart';
-import '../../pages/appBarDemo.dart';
-import '../../pages/TextField.dart';
+import 'SettingDemo.dart';
+import 'DrawingBoard.dart';
 
 class Tabs extends StatefulWidget {
   final index;
@@ -30,9 +31,9 @@ class _TabsState extends State<Tabs> {
 
   List _pageList = [
     HomeContent(),
-    TextFieldDemoPage(),
+    DrawingBoard(),
     CategoryPage(),
-    ButtonDemoPage(),
+    SettingDemo(),
     SettingPage()
   ];
 
@@ -40,10 +41,16 @@ class _TabsState extends State<Tabs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('William的 Flutter Demo'),
+          elevation: 10,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Text(
+            'Williams Flutter Demo',
+          ),
+          centerTitle: true,
           backgroundColor:
               this._currentIndex == 2 ? Colors.blue : Colors.green),
-      //浮动按钮
+      // ? 类似咸鱼的加号
       floatingActionButton: Container(
         height: 70,
         width: 70,
@@ -83,7 +90,8 @@ class _TabsState extends State<Tabs> {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
             BottomNavigationBarItem(
-                icon: Icon(Icons.card_giftcard), title: Text('鱼塘')),
+                icon: Icon(IconData(0xec43, fontFamily: 'Gamepad')),
+                title: Text('鱼塘')),
             BottomNavigationBarItem(
                 icon: Icon(Icons.category), title: Text('分类')),
             BottomNavigationBarItem(
@@ -138,6 +146,10 @@ class _TabsState extends State<Tabs> {
                 child: Icon(Icons.home),
               ),
               title: Text('我的空间'),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.pushNamed(context, '/categoryPage');
+              },
             ),
             Divider(),
             ListTile(
@@ -156,14 +168,80 @@ class _TabsState extends State<Tabs> {
                 child: Icon(Icons.settings),
               ),
               title: Text('设置中心'),
+              onTap: () {
+                // Navigator.of(context).pop();
+                Navigator.pushNamed(context, '/settingPage');
+              },
             ),
             Divider(),
           ],
         ),
       ),
       endDrawer: Drawer(
-        child: Text('右侧侧边栏'),
-      ),
+          child: ListView(
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 100,
+              ),
+              RaisedButton(
+                child: Text('跳转到登录页面'),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/fromDemo');
+                },
+                color: Theme.of(context).accentColor,
+                textTheme: ButtonTextTheme.primary,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              RaisedButton(
+                child: Text('跳转到注册页面'),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/registerFirst');
+                },
+                color: Theme.of(context).accentColor,
+                textTheme: ButtonTextTheme.primary,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              RaisedButton(
+                child: Text('Get请求数据后渲染'),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/httpDemo');
+                },
+                color: Colors.purple,
+                textTheme: ButtonTextTheme.primary,
+                elevation: 20,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              RaisedButton(
+                child: Text('Dio请求数据后渲染'),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/dioDemo');
+                },
+                color: Colors.blueAccent,
+                textTheme: ButtonTextTheme.primary,
+                elevation: 20,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              StartClip(),
+            ],
+          )
+        ],
+      )),
     );
   }
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: William-Zhou
  * @Date: 2020-11-02 15:37:32
- * @LastEditTime: 2020-11-02 16:13:16
+ * @LastEditTime: 2020-11-13 10:31:46
  * @LastEditors: William-Zhou
  * @Description: 
  */
@@ -20,7 +20,10 @@ class RegisterFirstPage extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            Text('这是注册的第一步，请输入手机号，然后点击下一步'),
+            Text('这是注册的第一步，请输入手机号，然后点击下一步',
+                style: TextStyle(
+                  fontFamily: 'Banshu',
+                )),
             SizedBox(
               height: 40,
             ),

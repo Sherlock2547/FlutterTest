@@ -1,7 +1,7 @@
 /*
  * @Author: William-Zhou
  * @Date: 2020-11-03 08:50:59
- * @LastEditTime: 2020-11-03 10:45:12
+ * @LastEditTime: 2020-11-18 14:52:06
  * @LastEditors: William-Zhou
  * @Description: 
  */
@@ -12,11 +12,19 @@ class ButtonDemoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('按钮演示页面'),
+        title: Text('按钮演示页面',
+            style: TextStyle(
+              fontFamily: 'Banshu',
+            )),
         //右上角的按钮
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.ad_units), onPressed: () {}),
+          IconButton(
+              icon: Icon(Icons.ad_units),
+              onPressed: () {
+                Navigator.pushNamed(context, '/');
+              }),
         ],
+        centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -243,6 +251,38 @@ class ButtonDemoPage extends StatelessWidget {
               )
             ],
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Ink(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color(0xFFDE2F21),
+                          Color(0xFFA5DF1D),
+                          Color(0xFF138ED4),
+                          Color(0xFFC413D4),
+                        ]),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: InkWell(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                    child: Text(
+                      '这是InkWell的点击效果',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+              )
+            ],
+          )
         ],
       ),
     );

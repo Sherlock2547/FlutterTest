@@ -1,7 +1,7 @@
 /*
  * @Author: William-Zhou
  * @Date: 2020-11-03 16:13:35
- * @LastEditTime: 2020-11-04 09:48:04
+ * @LastEditTime: 2020-11-16 08:51:11
  * @LastEditors: William-Zhou
  * @Description: 
  */
@@ -48,12 +48,37 @@ class _FormDemoPageState extends State<FormDemoPage> {
     });
   }
 
+  //* 进度按钮
+  ButtonStatus _buttonStatus = ButtonStatus.none;
+
+  _buildChild() {
+    if (_buttonStatus == ButtonStatus.none) {
+      return Text(
+        '登 录',
+        style: TextStyle(color: Colors.white, fontSize: 18),
+      );
+    } else if (_buttonStatus == ButtonStatus.loading) {
+      return CircularProgressIndicator(
+        backgroundColor: Colors.white,
+        strokeWidth: 2,
+      );
+    } else if (_buttonStatus == ButtonStatus.done) {
+      return Icon(
+        Icons.check,
+        color: Colors.white,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('登录页'),
+        title: Text(
+          '登录页',
+          style: TextStyle(fontFamily: 'Suxin'),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(20),
@@ -131,6 +156,10 @@ class _FormDemoPageState extends State<FormDemoPage> {
               height: 50,
               width: 170,
               child: RaisedButton(
+                color: Colors.blue,
+                elevation: 20,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
                 onPressed: () {
                   print(new DateTime.now());
                   print('用户名：' + this._userName);
@@ -140,16 +169,38 @@ class _FormDemoPageState extends State<FormDemoPage> {
                   print('描述：${this.info}');
                 },
                 child: Text('登录'),
-                color: Colors.blue,
-                textColor: Colors.white,
-                elevation: 20,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+
+            MaterialButton(
+              color: Colors.blue,
+              minWidth: 240,
+              height: 48,
+              onPressed: () {
+                setState(() {
+                  _buttonStatus = ButtonStatus.loading;
+                  Future.delayed(Duration(seconds: 2), () {
+                    setState(() {
+                      _buttonStatus = ButtonStatus.done;
+                    });
+                  });
+                  Future.delayed(Duration(seconds: 3), () {
+                    setState(() {
+                      _buttonStatus = ButtonStatus.none;
+                    });
+                  });
+                });
+              },
+              child: _buildChild(),
+            )
           ],
         ),
       ),
     );
   }
 }
+
+enum ButtonStatus { none, loading, done }

@@ -1,7 +1,7 @@
 /*
  * @Author: William-Zhou
  * @Date: 2020-11-03 15:35:00
- * @LastEditTime: 2020-11-03 16:08:18
+ * @LastEditTime: 2020-11-13 11:23:27
  * @LastEditors: William-Zhou
  * @Description: 
  */
@@ -14,6 +14,22 @@ class CheckBoxDemo extends StatefulWidget {
 
 class _CheckBoxDemoState extends State<CheckBoxDemo> {
   var flag = true;
+
+  var _radioValue = '1';
+  var _radioGroupValue = '语文';
+  _buildEditable() {
+    return Radio(
+      value: _radioValue,
+      groupValue: _radioGroupValue,
+      onChanged: (value) {
+        print('$value');
+        setState(() {
+          _radioGroupValue = value;
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +41,7 @@ class _CheckBoxDemoState extends State<CheckBoxDemo> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Checkbox(
                 value: this.flag,
@@ -38,6 +55,7 @@ class _CheckBoxDemoState extends State<CheckBoxDemo> {
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[Text(this.flag ? '选中' : '未选中')],
           ),
           SizedBox(
@@ -67,6 +85,47 @@ class _CheckBoxDemoState extends State<CheckBoxDemo> {
             secondary: Icon(Icons.sanitizer),
             selected: this.flag,
           ),
+          Divider(),
+          Row(
+            children: <Widget>[
+              Flexible(
+                child: RadioListTile(
+                  activeColor: Colors.red,
+                  title: Text('语文'),
+                  value: '语文',
+                  groupValue: _radioGroupValue,
+                  onChanged: (value) {
+                    setState(() {
+                      _radioGroupValue = value;
+                    });
+                  },
+                ),
+              ),
+              Flexible(
+                  child: RadioListTile(
+                title: Text('数学'),
+                value: '数学',
+                groupValue: _radioGroupValue,
+                onChanged: (value) {
+                  setState(() {
+                    _radioGroupValue = value;
+                  });
+                },
+              )),
+              Flexible(
+                  child: RadioListTile(
+                activeColor: Colors.cyan,
+                title: Text('英语'),
+                value: '英语',
+                groupValue: _radioGroupValue,
+                onChanged: (value) {
+                  setState(() {
+                    _radioGroupValue = value;
+                  });
+                },
+              )),
+            ],
+          )
         ],
       ),
     );

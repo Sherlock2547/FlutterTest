@@ -1,7 +1,7 @@
 /*
  * @Author: William-Zhou
  * @Date: 2020-11-04 10:26:20
- * @LastEditTime: 2020-11-04 15:44:18
+ * @LastEditTime: 2020-11-17 11:05:59
  * @LastEditors: William-Zhou
  * @Description: 
  */
@@ -31,6 +31,11 @@ class _DatePickerDemoState extends State<DatePickerDemo> {
       initialDate: _nowDate,
       firstDate: DateTime(1980),
       lastDate: DateTime(2100),
+      helpText: '选日期啊',
+      errorFormatText: '错误的日期格式啊',
+      errorInvalidText: '日期格式非法啊',
+      fieldHintText: '年/月/日',
+      fieldLabelText: '填写日期吧',
       // locale: Locale('zh')
     );
     print(result);

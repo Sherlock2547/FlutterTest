@@ -1,11 +1,12 @@
 /*
  * @Author: William-Zhou
  * @Date: 2020-11-05 08:32:00
- * @LastEditTime: 2020-11-05 09:31:22
+ * @LastEditTime: 2020-11-18 13:50:08
  * @LastEditors: William-Zhou
  * @Description: 
  */
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -21,7 +22,10 @@ class _DialogPageState extends State<DialogPage> {
         builder: (context) {
           return AlertDialog(
             title: Text('提示信息'),
-            content: Text('确定要删除吗'),
+            content: Text('确定要删除吗??'),
+            elevation: 24,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
             actions: <Widget>[
               RaisedButton(
                 onPressed: () {
@@ -31,7 +35,7 @@ class _DialogPageState extends State<DialogPage> {
                 child: Text('取消'),
                 color: Colors.purple,
                 textColor: Colors.white,
-                elevation: 20,
+                elevation: 10,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
               ),
@@ -43,7 +47,7 @@ class _DialogPageState extends State<DialogPage> {
                 child: Text('确定'),
                 color: Colors.cyan,
                 textColor: Colors.white,
-                elevation: 20,
+                elevation: 10,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
               ),
@@ -167,6 +171,86 @@ class _DialogPageState extends State<DialogPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            PopupMenuButton<String>(
+              offset: Offset(85, 100),
+              shape: RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.green),
+                  borderRadius: BorderRadius.circular(10)),
+              icon: Icon(Icons.add),
+              elevation: 5,
+              padding: EdgeInsets.all(5),
+              // color: Colors.red,
+              tooltip: 'PopupMenuButton',
+              initialValue: '化学',
+              onSelected: (value) {
+                print('$value');
+              },
+              onCanceled: () {
+                print('onCanceled');
+              },
+              itemBuilder: (context) {
+                return <PopupMenuEntry<String>>[
+                  PopupMenuItem<String>(
+                    value: '语文',
+                    child: Text('语文'),
+                  ),
+                  PopupMenuDivider(),
+                  PopupMenuItem<String>(
+                    value: '数学',
+                    child: Text('数学'),
+                  ),
+                  PopupMenuDivider(),
+                  PopupMenuItem<String>(
+                    value: '英语',
+                    child: Text('英语'),
+                  ),
+                  PopupMenuDivider(),
+                  PopupMenuItem<String>(
+                    value: '生物',
+                    child: Text('生物'),
+                  ),
+                  PopupMenuDivider(),
+                  PopupMenuItem<String>(
+                    value: '化学',
+                    child: Text('化学'),
+                  ),
+                  PopupMenuDivider(),
+                  PopupMenuItem<String>(
+                    value: '语文',
+                    enabled: false,
+                    child: Text('语文'),
+                  ),
+                  PopupMenuDivider(),
+                  PopupMenuItem<String>(
+                    value: '数学',
+                    textStyle: TextStyle(color: Colors.red),
+                    child: Text('数学'),
+                  ),
+                  PopupMenuDivider(
+                    height: 50,
+                  ),
+                  PopupMenuItem<String>(
+                    value: '英语',
+                    height: 70,
+                    child: Text('英语'),
+                  ),
+                  PopupMenuDivider(),
+                  CheckedPopupMenuItem(
+                    value: '语文',
+                    checked: true,
+                    child: Text('语文'),
+                  ),
+                  PopupMenuDivider(),
+                  CheckedPopupMenuItem(
+                    value: '数学',
+                    child: Text('数学'),
+                  ),
+                ];
+              },
+            ),
+            SizedBox(
+              height: 30,
+            ),
             RaisedButton(
               onPressed: _alertDialog,
               child: Text('alter弹出框-AlterDialog'),
@@ -176,6 +260,37 @@ class _DialogPageState extends State<DialogPage> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
             ),
+            // SizedBox(
+            //   height: 30,
+            // ),
+            // RaisedButton(
+            //   child: Text('IOSAlertDialog'),
+            //   color: Colors.cyan,
+            //   textColor: Colors.white,
+            //   elevation: 20,
+            //   shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(10)),
+            //   onPressed: () {
+            //     showCupertinoDialog(
+            //         context: context,
+            //         builder: (context) {
+            //           return CupertinoAlertDialog(
+            //             title: Text('提示'),
+            //             content: Text('确认删除吗？'),
+            //             actions: <Widget>[
+            //               CupertinoDialogAction(
+            //                 child: Text('取消'),
+            //                 onPressed: () {},
+            //               ),
+            //               CupertinoDialogAction(
+            //                 child: Text('确认'),
+            //                 onPressed: () {},
+            //               ),
+            //             ],
+            //           );
+            //         });
+            //   },
+            // ),
             SizedBox(
               height: 30,
             ),
@@ -185,8 +300,7 @@ class _DialogPageState extends State<DialogPage> {
               color: Colors.blue,
               textColor: Colors.white,
               elevation: 20,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+              shape: StadiumBorder(),
             ),
             SizedBox(
               height: 30,
@@ -197,7 +311,7 @@ class _DialogPageState extends State<DialogPage> {
               color: Colors.purple,
               textColor: Colors.white,
               elevation: 20,
-              shape: RoundedRectangleBorder(
+              shape: ContinuousRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
             ),
             SizedBox(
@@ -209,8 +323,10 @@ class _DialogPageState extends State<DialogPage> {
               color: Colors.pink,
               textColor: Colors.white,
               elevation: 20,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+              shape: BorderDirectional(
+                start: BorderSide(color: Colors.green, width: 7),
+                end: BorderSide(color: Colors.blue, width: 7),
+              ),
             ),
           ],
         ),

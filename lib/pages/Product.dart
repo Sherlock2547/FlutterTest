@@ -1,7 +1,7 @@
 /*
  * @Author: William-Zhou
  * @Date: 2020-11-02 15:07:46
- * @LastEditTime: 2020-11-02 15:21:13
+ * @LastEditTime: 2020-11-23 14:16:26
  * @LastEditors: William-Zhou
  * @Description: 
  */
@@ -13,6 +13,7 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  String _string = 'A页面';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +25,15 @@ class _ProductPageState extends State<ProductPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           RaisedButton(
-            child: Text('跳转到搜索页面'),
-            onPressed: () {
-              Navigator.pushNamed(context, '/search', arguments: {'id': 123});
+            child: Text(_string),
+            // onPressed: () {
+            //   Navigator.pushNamed(context, '/search', arguments: {'id': 123});
+            // },
+            onPressed: () async {
+              var result = await Navigator.of(context).pushNamed('/search');
+              setState(() {
+                _string = result;
+              });
             },
             color: Theme.of(context).accentColor,
             textTheme: ButtonTextTheme.primary,

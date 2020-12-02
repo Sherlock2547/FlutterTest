@@ -1,10 +1,11 @@
 /*
  * @Author: William-Zhou
  * @Date: 2020-11-03 11:25:03
- * @LastEditTime: 2020-11-03 16:46:31
+ * @LastEditTime: 2020-11-14 14:53:53
  * @LastEditors: William-Zhou
  * @Description: 
  */
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldDemoPage extends StatefulWidget {
@@ -18,6 +19,7 @@ class _TextFieldDemoPageState extends State<TextFieldDemoPage> {
   var _password;
   var sex = 1;
   bool flag = true;
+  var _switchValue = false;
   @override
   void initState() {
     super.initState();
@@ -132,6 +134,8 @@ class _TextFieldDemoPageState extends State<TextFieldDemoPage> {
               height: 20,
             ),
             Switch(
+                activeColor: Colors.red,
+                activeTrackColor: Colors.blue,
                 value: this.flag,
                 onChanged: (v) {
                   setState(() {
@@ -139,6 +143,14 @@ class _TextFieldDemoPageState extends State<TextFieldDemoPage> {
                     this.flag = v;
                   });
                 }),
+            CupertinoSwitch(
+              value: _switchValue,
+              onChanged: (value) {
+                setState(() {
+                  _switchValue = value;
+                });
+              },
+            ),
             SizedBox(
               height: 20,
             ),

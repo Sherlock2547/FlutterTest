@@ -1,7 +1,7 @@
 /*
  * @Author: William-Zhou
  * @Date: 2020-11-02 23:15:14
- * @LastEditTime: 2020-11-02 23:34:52
+ * @LastEditTime: 2020-11-14 15:14:58
  * @LastEditors: William-Zhou
  * @Description: 
  */
@@ -60,6 +60,18 @@ class _TabBarControllerPageState extends State<TabBarControllerPage>
                     child: Image.network(
                       e['imageUrl'],
                       fit: BoxFit.cover,
+                      frameBuilder: (BuildContext context, Widget child,
+                          int frame, bool wasSynchronouslyLoaded) {
+                        if (wasSynchronouslyLoaded) {
+                          return child;
+                        }
+                        return AnimatedOpacity(
+                          child: child,
+                          opacity: frame == null ? 0 : 1,
+                          duration: const Duration(seconds: 2),
+                          curve: Curves.easeOut,
+                        );
+                      },
                     ),
                   ),
                   ListTile(
